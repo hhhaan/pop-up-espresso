@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 export const InfoScreen = () => {
     return (
         <div className="flex p-4 h-screen flex-col">

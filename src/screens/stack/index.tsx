@@ -1,7 +1,8 @@
 'use client';
 
-import { GAME_CONFIG } from '@/src/features/stack-game/config';
 import { useEffect, useRef, useState } from 'react';
+
+import { GAME_CONFIG } from '@/features/stack-game/config';
 
 export const StackGameScreen = () => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -209,7 +210,7 @@ export const StackGameScreen = () => {
             canvas.removeEventListener('touchstart', handleCanvasClick);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [canvasSize]);
+    }, [canvasSize]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">

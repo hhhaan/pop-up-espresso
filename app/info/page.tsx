@@ -1,4 +1,4 @@
-import { InfoScreen } from '@/src/screens/info';
+import { InfoScreen } from '@/screens/info';
 
 export default function InfoPage() {
     return <InfoScreen />;

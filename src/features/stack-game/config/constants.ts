@@ -63,4 +63,4 @@ export const GAME_CONFIG = {
     CONTROLS: {
         TRIGGER_KEY: 'Space',
     },
-} as const;
+};

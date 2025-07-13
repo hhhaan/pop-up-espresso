@@ -1,4 +1,4 @@
-import { StackGameScreen } from '@/src/screens/stack';
+import { StackGameScreen } from '@/screens/stack';
 
 export default function StackGame() {
     return <StackGameScreen />;
