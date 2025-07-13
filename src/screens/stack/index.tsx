@@ -147,67 +147,75 @@ export const StackGameScreen = () => {
 
         draw();
 
-        const handleSpace = (e: KeyboardEvent) => {
-            if (e.code === GAME_CONFIG.CONTROLS.TRIGGER_KEY) {
-                if (checkCollision(currentBlock.x)) {
-                    setGameOver(true);
+        // 게임 액션 공통 로직
+        const executeGameAction = () => {
+            if (gameOver) return;
 
-                    // 마지막으로 빨간색으로 한 번 더 그리기
-                    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-                    updateCamera();
-                    stack.forEach((block) => drawCup(block.x, block.y));
+            if (checkCollision(currentBlock.x)) {
+                setGameOver(true);
 
-                    const currentBlockY = canvasHeight - blockHeight * (stack.length + 1);
-                    drawCup(currentBlock.x, currentBlockY, true); // 강제로 빨간색
+                // 마지막으로 빨간색으로 한 번 더 그리기
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                updateCamera();
+                stack.forEach((block) => drawCup(block.x, block.y));
 
-                    ctx.fillStyle = GAME_CONFIG.COLORS.TEXT;
-                    ctx.font = `bold ${GAME_CONFIG.FONT.SCORE_SIZE} ${GAME_CONFIG.FONT.SCORE_FAMILY}`;
-                    ctx.fillText(`Score: ${stack.length}`, 10, 30);
+                const currentBlockY = canvasHeight - blockHeight * (stack.length + 1);
+                drawCup(currentBlock.x, currentBlockY, true); // 강제로 빨간색
 
-                    cancelAnimationFrame(animationFrameId);
-                    return;
-                }
+                ctx.fillStyle = GAME_CONFIG.COLORS.TEXT;
+                ctx.font = `bold ${GAME_CONFIG.FONT.SCORE_SIZE} ${GAME_CONFIG.FONT.SCORE_FAMILY}`;
+                ctx.fillText(`Score: ${stack.length}`, 10, 30);
 
-                const newBlock = { x: currentBlock.x, y: canvasHeight - blockHeight * (stack.length + 1) };
-
-                stack.push(newBlock);
-                setScore(stack.length);
-
-                // 속도 증가
-                const speedMultiplier = Math.pow(
-                    GAME_CONFIG.GAMEPLAY.SPEED_MULTIPLIER,
-                    Math.floor(stack.length / GAME_CONFIG.GAMEPLAY.SPEED_INCREASE_INTERVAL)
-                );
-                currentBlock.speed = baseSpeed * speedMultiplier;
-
-                currentBlock.x = 0;
-                direction = 1;
+                cancelAnimationFrame(animationFrameId);
+                return;
             }
+
+            const newBlock = { x: currentBlock.x, y: canvasHeight - blockHeight * (stack.length + 1) };
+
+            stack.push(newBlock);
+            setScore(stack.length);
+
+            // 속도 증가
+            const speedMultiplier = Math.pow(
+                GAME_CONFIG.GAMEPLAY.SPEED_MULTIPLIER,
+                Math.floor(stack.length / GAME_CONFIG.GAMEPLAY.SPEED_INCREASE_INTERVAL)
+            );
+            currentBlock.speed = baseSpeed * speedMultiplier;
+
+            currentBlock.x = 0;
+            direction = 1;
         };
 
         // 키보드 이벤트
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.code === GAME_CONFIG.CONTROLS.TRIGGER_KEY) {
                 e.preventDefault();
-                handleSpace(e);
+                executeGameAction();
             }
         };
 
-        // 터치/클릭 이벤트
-        const handleCanvasClick = (e: MouseEvent | TouchEvent) => {
+        // 터치 이벤트
+        const handleCanvasTouch = (e: TouchEvent) => {
             e.preventDefault();
-            handleSpace(e as any);
+            e.stopPropagation();
+            executeGameAction();
+        };
+
+        // 클릭 이벤트
+        const handleCanvasClick = (e: MouseEvent) => {
+            e.preventDefault();
+            executeGameAction();
         };
 
         // 이벤트 리스너 등록
         window.addEventListener('keydown', handleKeyDown);
+        canvas.addEventListener('touchstart', handleCanvasTouch, { passive: false });
         canvas.addEventListener('click', handleCanvasClick);
-        canvas.addEventListener('touchstart', handleCanvasClick);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
+            canvas.removeEventListener('touchstart', handleCanvasTouch);
             canvas.removeEventListener('click', handleCanvasClick);
-            canvas.removeEventListener('touchstart', handleCanvasClick);
             cancelAnimationFrame(animationFrameId);
         };
     }, [canvasSize]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -227,6 +235,9 @@ export const StackGameScreen = () => {
                             width: `${canvasSize.width}px`,
                             height: `${canvasSize.height}px`,
                             maxWidth: '100%',
+                            touchAction: 'manipulation',
+                            userSelect: 'none',
+                            WebkitUserSelect: 'none',
                         }}
                     />
 
@@ -246,6 +257,7 @@ export const StackGameScreen = () => {
                                     onClick={() => {
                                         window.location.reload();
                                     }}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                                 >
                                     Retry
                                 </button>
