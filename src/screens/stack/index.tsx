@@ -253,14 +253,7 @@ export const StackGameScreen = () => {
                                 <p className={`${GAME_CONFIG.FONT.SCORE_DISPLAY_SIZE} font-jersey-10-charted mb-4`}>
                                     Score: {score}
                                 </p>
-                                <button
-                                    onClick={() => {
-                                        window.location.reload();
-                                    }}
-                                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                >
-                                    Retry
-                                </button>
+                                <button onClick={() => window.location.reload()}>Retry</button>
                             </div>
                         </div>
                     )}
