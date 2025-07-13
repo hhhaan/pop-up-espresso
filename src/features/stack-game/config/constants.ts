@@ -36,7 +36,7 @@ export const GAME_CONFIG = {
     // 게임플레이 설정
     GAMEPLAY: {
         BASE_SPEED: 3,
-        SPEED_MULTIPLIER: 1.5, // 속도 증가 배수
+        SPEED_MULTIPLIER: 1.8, // 속도 증가 배수
         SPEED_INCREASE_INTERVAL: 10, // 몇 스택마다 속도 증가
         SCROLL_THRESHOLD: 10, // 카메라 스크롤 시작 스택 높이
     },
