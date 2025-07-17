@@ -41,6 +41,13 @@ export const HomeScreen = () => {
                         </div>
 
                         <div className="flex flex-col py-10 border-t border-black">
+                            <p className="text-[26px] mb-5 tracking-tighter font-bold">Ethiopia Tamiru Murago</p>
+                            <Link href="/stack">
+                                <Image src="/7.png" alt="stack" width={400} height={400} className="object-contain " />
+                            </Link>
+                            <p className="mt-5 text-sm font-semibold tracking-tighter hover:underline">→ see</p>
+                        </div>
+                        <div className="flex flex-col py-10 border-t border-black">
                             <p className="text-[26px] mb-5 tracking-tighter font-bold">Stacking Up Espresso</p>
                             <Link href="/stack">
                                 <Image
