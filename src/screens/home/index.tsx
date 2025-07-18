@@ -32,20 +32,31 @@ export const HomeScreen = () => {
                                     alt="logo"
                                     width={400}
                                     height={400}
-                                    className="object-contain "
+                                    className="object-contain mb-1 "
                                 />
                             </Link>
-                            <p className="text-xs tracking-tighter">Inspiration</p>
-                            {/* <p className="mt-5 text-sm tracking-tighter">와사비의 마음을 아시나요</p> */}
-                            <p className="mt-5 text-sm font-semibold tracking-tighter hover:underline">→ see more</p>
+                            <p className="text-xs mb-2 tracking-tighter">Inspiration</p>
+                            <p className="text-xs tracking-tighter">
+                                와사바의 마음은 미스터 초밥왕 1권에 나오는 에피소드로
+                            </p>
+                            <div className="flex mt-5 items-center">
+                                <span className="text-xs pr-1 hover:underline">⟶</span>
+                                <p className="text-xs font-semibold tracking-tighter"> See more</p>
+                            </div>
                         </div>
 
                         <div className="flex flex-col py-10 border-t border-black">
-                            <p className="text-[26px] mb-5 tracking-tighter font-bold">Ethiopia Tamiru Murago</p>
-                            <Link href="/stack">
+                            <Link href="/info-coffee">
                                 <Image src="/7.png" alt="stack" width={400} height={400} className="object-contain " />
                             </Link>
-                            <p className="mt-5 text-sm font-semibold tracking-tighter hover:underline">→ see</p>
+                            <p className="text-xs mb-2 tracking-tighter">about coffee</p>
+
+                            <p className="text-[26px] my-5 tracking-tighter font-bold">Ethiopia Bensa Murago</p>
+
+                            <div className="flex h-[300px] mt-5">
+                                <span className="text-xs pr-1 hover:underline">⟶</span>
+                                <p className="text-xs font-semibold tracking-tighter"> See more</p>
+                            </div>
                         </div>
                         <div className="flex flex-col py-10 border-t border-black">
                             <p className="text-[26px] mb-5 tracking-tighter font-bold">Stacking Up Espresso</p>
@@ -58,7 +69,13 @@ export const HomeScreen = () => {
                                     className="object-contain border-black border-1"
                                 />
                             </Link>
-                            <p className="mt-5 text-sm font-semibold tracking-tighter hover:underline">→ try it</p>
+                            <p className="text-xs mb-2 tracking-tighter">game</p>
+                            <div className="flex mt-5 items-center">
+                                <span className="text-xs pr-1 hover:underline">⟶</span>
+                                <p className="text-xs font-semibold tracking-tighter hover:underline"> See more</p>
+                            </div>
+                            <p className="text-xs  tracking-tighter hover:underline">Tshirt prize for winner</p>
+                            <p className="text-xs  tracking-tighter hover:underline">에스프레소 바에 가면</p>
                         </div>
                     </div>
                 </main>
