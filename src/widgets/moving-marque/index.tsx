@@ -4,7 +4,7 @@ export const MovingMarque = () => {
     const text = 'ESPRESSO IS ALL YOU NEED';
 
     return (
-        <div className="w-full overflow-hidden bg-white p-4">
+        <div className="w-full overflow-hidden bg-white px-5 py-4">
             <div className="flex whitespace-nowrap border-y border-black">
                 <div
                     className="flex-shrink-0 font-normal animate-scroll tracking-normal"
