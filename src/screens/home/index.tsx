@@ -6,7 +6,7 @@ import { Playlist } from '@/widgets/playlist';
 
 export const HomeScreen = () => {
     return (
-        <div className="flex flex-col min-h-screen bg-[#BDB49F]">
+        <div className="flex flex-col min-h-screen bg-white">
             <Header />
             <div className="flex flex-col items-center gap-4">
                 <div className="flex w-full px-5 justify-center flex-col items-center gap-4">
