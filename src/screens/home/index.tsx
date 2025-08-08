@@ -51,6 +51,7 @@ export const HomeScreen = () => {
                             autoPlay
                             loop
                             muted
+                            playsInline
                         ></video>
                         {/* <p className="text-xs py-5 tracking-tighter">Game</p> */}
                         <p className="text-[26px] pt-5 pb-5 tracking-tighter font-bold">Stack Up Espresso</p>
