@@ -1,8 +1,10 @@
-import { Geist, Geist_Mono, Jersey_10_Charted } from 'next/font/google';
+import { Black_Han_Sans, Geist, Geist_Mono, Jersey_10_Charted } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
 import './globals.css';
+
+const blackHanSans = Black_Han_Sans({ variable: '--font-black-han-sans', subsets: ['latin'], weight: ['400'] });
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -35,7 +37,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} ${jersey10Charted.variable} antialiased`}>
+            <body
+                className={` ${blackHanSans.variable} ${geistSans.variable} ${geistMono.variable} ${jersey10Charted.variable} antialiased`}
+            >
                 {children}
             </body>
         </html>
