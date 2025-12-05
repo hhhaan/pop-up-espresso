@@ -4,7 +4,7 @@ import { Header } from '@/widgets/header';
 
 export default function InfoCoffee() {
     return (
-        <>
+        <div className="flex flex-col max-w-md mx-auto min-h-screen bg-white">
             <Header />
             <div className="flex h-screen flex-col px-8">
                 <section className="flex flex-col border-b border-black pb-20">
@@ -79,6 +79,6 @@ export default function InfoCoffee() {
                     </div>
                 </section>
             </div>
-        </>
+        </div>
     );
 }
