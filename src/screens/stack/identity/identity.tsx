@@ -1,0 +1,77 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+
+import { GAME_CONFIG } from '@/features/stack-game/config';
+import { useStackGame } from '@/features/stack-game/hooks/use-stack-game';
+import { calculateCanvasSize } from '@/features/stack-game/utils';
+import { Layout } from '@/widgets/layout';
+import { MovingMarque } from '@/widgets/moving-marque';
+
+export const StackGameScreen = () => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const [canvasSize, setCanvasSize] = useState<{ width: number; height: number }>({
+        width: GAME_CONFIG.CANVAS.DEFAULT_WIDTH,
+        height: GAME_CONFIG.CANVAS.DEFAULT_HEIGHT,
+    });
+
+    const { canvasRef, gameState } = useStackGame(canvasSize);
+    const { score, gameOver } = gameState;
+
+    useEffect(() => {
+        const handleResize = () => {
+            const container = containerRef.current;
+            if (!container) return;
+            const newSize = calculateCanvasSize(container.clientWidth, window.innerHeight);
+            setCanvasSize(newSize);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return (
+        <Layout header={false}>
+            <div className="flex flex-col items-center justify-center mt-4 p-4 ">
+                <MovingMarque text="IDENTITY COFFEE LAB" />
+                {/* <h1 className={`${GAME_CONFIG.FONT.TITLE_SIZE} font-bold mb-4 text-center`}>
+                    Stack it up! Gift for Winner
+                </h1> */}
+
+                <div ref={containerRef} className="w-full max-w-md">
+                    <div className={`relative bg-${GAME_CONFIG.COLORS.BACKGROUND} p-4`}>
+                        <canvas
+                            ref={canvasRef}
+                            className={`border border-${GAME_CONFIG.COLORS.CANVAS_BORDER} w-full mx-auto h-auto block`}
+                            style={{
+                                width: `${canvasSize.width}px`,
+                                height: `${canvasSize.height}px`,
+                                maxWidth: '100%',
+                                touchAction: 'manipulation',
+                                userSelect: 'none',
+                                WebkitUserSelect: 'none',
+                            }}
+                        />
+
+                        {gameOver && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                <div className="p-6 rounded-lg text-center">
+                                    <h2
+                                        className={`${GAME_CONFIG.FONT.GAME_OVER_SIZE} font-jersey-10-charted font-bold text-red-500 mb-4`}
+                                    >
+                                        Its Over!
+                                    </h2>
+                                    <p className={`${GAME_CONFIG.FONT.SCORE_DISPLAY_SIZE} font-jersey-10-charted mb-4`}>
+                                        Score: {score}
+                                    </p>
+                                    <button onClick={() => window.location.reload()}>Retry</button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    );
+};

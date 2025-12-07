@@ -2,15 +2,18 @@
 
 import { Header } from '@/widgets/header';
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
+interface LayoutProps {
+    children: React.ReactNode;
+    header?: boolean;
+}
+
+export const Layout = ({ children, header = true }: LayoutProps) => {
     return (
         <div className="flex flex-col max-w-md mx-auto min-h-screen bg-white">
-            <Header />
+            {header && <Header />}
             <div>{children}</div>
         </div>
     );
 };
 
 export default Layout;
-
-//
