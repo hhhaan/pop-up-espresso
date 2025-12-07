@@ -69,7 +69,7 @@ export const HomeScreen = () => {
                     </Link>
                 </div>
             </main>
-            <MovingMarque />
+            <MovingMarque text="ESPRESSO IS ALL YOU NEED" />
         </Layout>
     );
 };

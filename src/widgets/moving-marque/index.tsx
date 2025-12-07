@@ -1,8 +1,9 @@
 'use client';
 
-export const MovingMarque = () => {
-    const text = 'ESPRESSO IS ALL YOU NEED';
-
+interface MovingMarqueProps {
+    text: string;
+}
+export const MovingMarque = ({ text }: MovingMarqueProps) => {
     return (
         <div className="w-full overflow-hidden bg-white px-5 py-4">
             <div className="flex whitespace-nowrap border-y border-black">
