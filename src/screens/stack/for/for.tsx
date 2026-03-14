@@ -8,7 +8,7 @@ import { calculateCanvasSize } from '@/features/stack-game/utils';
 import { Layout } from '@/widgets/layout';
 import { MovingMarque } from '@/widgets/moving-marque';
 
-export const StackGameScreen = () => {
+export const StackGameScreen = ({ name }: { name: string }) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [canvasSize, setCanvasSize] = useState<{ width: number; height: number }>({
         width: GAME_CONFIG.CANVAS.DEFAULT_WIDTH,
@@ -34,7 +34,7 @@ export const StackGameScreen = () => {
     return (
         <Layout header={false}>
             <div className="flex flex-col items-center justify-center mt-4 p-4 ">
-                <MovingMarque text="IDENTITY COFFEE LAB" />
+                <MovingMarque text={`${name.toUpperCase()}`} />
                 {/* <h1 className={`${GAME_CONFIG.FONT.TITLE_SIZE} font-bold mb-4 text-center`}>
                     Stack it up! Gift for Winner
                 </h1> */}
